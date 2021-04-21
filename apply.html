@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>B.Esqueda</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/site.css">
+</head>
+
+<body onload="createTask()">
+
+    <header>
+
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="index.html">Task List</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/index.html">Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/apply.html">Application<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/code.html">Code</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about.html">About</a>
+                    </li>
+                </ul>
+                <a class="btn btn-outline-success my-2 my-sm-0" type="submit" href="https://brockesqueda.netlify.app/"
+                    target="_blank" rel="noopener noreferrer">Portfolio</a>
+            </div>
+        </nav>
+
+    </header>
+
+    <!-- Layout Page 2 -->
+    <!-- 1st Row (Grid 1) -->
+    <main role="main" class="container">
+
+        <div class="row">
+            <div class="col-3">
+                <!-- Side nav -->
+                <nav id="sidebar">
+                    <div class="sidebar-header wrapper">
+                        <h3>Secret Message</h3>
+                        <hr>
+                    </div>
+                    <ul class="list-unstyled components">
+                        <li> <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
+                                class="dropdown-toggle">Filter
+                                Tasks By Status</a>
+                            <ul class="collapse list-unstyled" id="homeSubmenu">
+                                <li> <a href="#link" class="btn btn-info btn-light" role="button">Incomplete Tasks</a>
+                                </li>
+                                <li> <a href="#link" class="btn btn-info btn-danger" role="button">Overdue</a></li>
+                                <li> <a href="#link" class="btn btn-info btn-outline-warning"
+                                        role="button">Completed</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <ul class="list-unstyled CTAs">
+                        <li> <a class="download" data-toggle="modal" data-target="#addTask">Add Task</a> </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- End side nav -->
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn btn-primary btn-block" id="addTaskButton" data-toggle="modal"
+                            data-target="#addTask">Add Task</button>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col">
+                        <div class="table-responsive">
+                            <table class="table table-light table-striped" id="mortgageTable">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Created</th>
+                                        <th>Due Date</th>
+                                        <th>Icons</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="resultsBody">
+                                    <!-- Results Here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="footer bg-dark">
+        <div class="container">
+            <span class="text-muted">Brock EsquedaⒸ 2021</span>
+        </div>
+    </footer>
+
+    <!-- Template -->
+    <template id="tableValues">
+        <tr id="taskRow">
+            <td id="title"></td>
+            <td id="created"></td>
+            <td id="dueDate"></td>
+            <td id="secretId" class="d-none"></td>
+            <td id="completed" data-id=""></td>
+
+            <a onclick="completeTask(this)" class="btn btn-outline-dark">Complete</a>
+            <a onclick="editTask(this)" class="btn btn-outline-dark">Edit</a>
+            <a onclick="deleteTask(this)" class="btn btn-outline-dark">DELETE</a>
+        </tr>
+    </template>
+
+    <!-- Bootstrap MODALS and Form layout -->
+    <div class="modal" id="addTask">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Add A New Task</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <form id="newTaskForm">
+                        <div class="form-group">
+                            <!-- for and id must match for this to work -->
+                            <label for="newTask">Title:</label>
+                            <input type="text" class="form-control" id="newTask" placeholder="Enter A New Task">
+                        </div>
+                        <div class="form-group">
+                            <label for="newDate">Due Date:</label>
+                            <input type="date" class="form-control" id="newDate" placeholder="Date">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="buttton" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="buttton" id="button" class="btn" onclick="saveTask()"
+                        style="background-color: rgb(43, 72, 199);" data-dismiss="modal">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script src=""></script>
+</body>
+
+</html>
