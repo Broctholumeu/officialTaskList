@@ -36,7 +36,8 @@
                         <a class="nav-link" href="/code.html">Code</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/Broctholumeu/officialTaskList" target="_blank">Git Code</a>
+                        <a class="nav-link" href="https://github.com/Broctholumeu/officialTaskList" target="_blank">Git
+                            Code</a>
                     </li>
                 </ul>
                 <a class="btn btn-outline-success my-2 my-sm-0" type="submit" href="https://brockesqueda.netlify.app/"
@@ -127,9 +128,11 @@
             <td id="secretId" class="d-none"></td>
             <td id="completed" data-id=""></td>
 
-            <a onclick="completeTask(this)" class="btn btn-outline-dark">Complete</a>
-            <a onclick="editTask(this)" class="btn btn-outline-dark">Edit</a>
-            <a onclick="deleteTask(this)" class="btn btn-outline-dark">DELETE</a>
+            <div class="btn-group" role="group" aria-label="">
+                <button type="button" class="btn btn-primary" onclick="taskComplete(this)">✔️</button>
+                <button type="button" class="btn btn-secondary" onclick="taskEdit(this)">✏️</button>
+                <button type="button" class="btn btn-danger" onclick="taskDelete(this)">🗑️</button>
+            </div>
         </tr>
     </template>
 

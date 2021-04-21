@@ -14,7 +14,7 @@ function prepareLocalStorage() {
 }
 
 function getLocalStorage() {
-    return JSON.parse(localStorage.getItem("taskArray"));
+    return JSON.parse(localStorage.getItem("taskArray")) || [];
 }
 
 function setLocalStorage(info) {
@@ -84,4 +84,16 @@ function saveTask() {
     localStorage.setItem("taskArray", JSON.stringify(taskForm));
 
     displayData(taskForm);
+}
+
+function displayData() {
+
+}
+
+
+
+// on load function to retrieve data
+function retrieveTask() {
+    let current = getLocalStorage();
+    displayData(current);
 }
