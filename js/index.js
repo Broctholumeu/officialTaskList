@@ -47,15 +47,15 @@ function listTasks(listData) {
 
 
 // Table
-function createTask(formDay, formTask) {
+function createTask(formFill) {
     let tasks = getLocalStorage();
 
     let task = {
         secretId: generateId(),
         created: new Date(),
         completed: false,
-        title: formDay.value,
-        dueDate: new Date(`${formTask.value} 00:00`)
+        title: formFill.value,
+        dueDate: new Date(`${formFill.value} 00:00`)
     }
     tasks.push(task);
     setLocalStorage(tasks);
